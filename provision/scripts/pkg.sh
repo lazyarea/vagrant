@@ -1,6 +1,5 @@
 #!/bin/bash
 
-yum update -y
 
 
 yum remove -y php php-*
@@ -25,7 +24,7 @@ NGINX
 
 yum -y --enablerepo=nginx install nginx
 yum -y install mariadb mariadb-devel mariadb-server
-yum -y install --enablerepo=remi-php56 libmcrypt libmcrypt-devel php php-mcrypt php-fpm
+yum -y install --enablerepo=remi-php56 libmcrypt libmcrypt-devel php php-mcrypt php-fpm composer
 
 yum remove -y httpd 
 systemctl enable nginx
@@ -37,5 +36,6 @@ firewall-cmd --permanent --add-port=443/tcp
 firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd --reload
 
+yum update -y
 reboot
 
