@@ -66,13 +66,6 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  	yum update -y
-	yum install -y vim nginx php-fpm mariadb mariadb-devel \
-		php php-pecl-xdebug php-devel php-mbstring php-pdo php-gd \
-	        php-pgsql php-mcrypt php-zlib php-zip php-mysql php-mysqlnd \
-		php-xml php-curl vim tree net-tools bind-utils ngrep nc
-  SHELL
+  #config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision :shell, :path: "provision/scripts/pkg.sh"
 end
