@@ -37,5 +37,5 @@ firewall-cmd --permanent --add-port=3306/tcp
 firewall-cmd --reload
 
 yum update -y
-reboot
+# reboot
 
