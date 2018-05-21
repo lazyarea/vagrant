@@ -30,6 +30,7 @@ yum -y install --enablerepo=remi-php56 libmcrypt libmcrypt-devel php php-mcrypt 
 
 yum remove -y httpd 
 systemctl enable nginx
+systemctl enable mariadb
 systemctl enable mariadb-server
 
 firewall-cmd --permanent --add-port=80/tcp
