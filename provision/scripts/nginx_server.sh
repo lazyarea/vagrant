@@ -13,7 +13,7 @@ server {
     root   /vagrant/system;
 
     location / {
-        root   /vagrant/system;
+        #root   /vagrant/system;
         index  index.php index.html index.htm;
     }
 
@@ -61,7 +61,7 @@ server {
     root   /vagrant/bukken;
 
     location / {
-        root   /vagrant/bukken;
+        #root   /vagrant/bukken;
         index  index.php index.html index.htm;
     }
 
