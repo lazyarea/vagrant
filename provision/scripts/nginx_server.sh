@@ -10,10 +10,10 @@ server {
     access_log  /var/log/nginx/system.access.log  main;
     error_log   /var/log/nginx/system.error.log   info;
 
-    root   /vagrant/system;
+    root   /vagrant/system.heiyou.jp/webroot;
 
     location / {
-        #root   /vagrant/system;
+	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
         index  index.php index.html index.htm;
     }
 
@@ -40,6 +40,7 @@ server {
         fastcgi_index  index.php;
 #        fastcgi_param  SCRIPT_FILENAME  /scripts\$fastcgi_script_name;
         fastcgi_param  SCRIPT_FILENAME  \$document_root/\$fastcgi_script_name;
+	fastcgi_param    CAKEPHP_ENV 'local';
         include        fastcgi_params;
     }
 
@@ -58,10 +59,10 @@ server {
     access_log  /var/log/nginx/bukken.access.log  main;
     error_log   /var/log/nginx/bukken.error.log   info;
 
-    root   /vagrant/bukken;
+    root   /vagrant/bukken.heiyou.jp/webroot;
 
     location / {
-        #root   /vagrant/bukken;
+	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
         index  index.php index.html index.htm;
     }
 
@@ -86,8 +87,9 @@ server {
 #        root           html;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
-#        fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-        fastcgi_param  SCRIPT_FILENAME  $document_root/$fastcgi_script_name;
+#        fastcgi_param  SCRIPT_FILENAME  /scripts\$fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  \$document_root/\$fastcgi_script_name;
+	fastcgi_param    CAKEPHP_ENV 'local';
         include        fastcgi_params;
     }
 
