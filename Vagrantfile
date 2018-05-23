@@ -70,6 +70,6 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   #config.vm.provision "shell", inline: <<-SHELL
   config.vm.provision :shell, :path => "provision/scripts/pkg.sh"
-  config.vm.provision :shell, :path => "provision/scripts/nginx_server.sh"
+  config.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
   config.vm.provision :shell, :path => "provision/scripts/env.sh"
 end
