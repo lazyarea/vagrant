@@ -4,7 +4,7 @@ cp /etc/nginx/conf.d/default.conf{,.org}
 cat > /etc/nginx/conf.d/default.conf << NGINX
 server {
     listen       80;
-    server_name  localhost;
+    #server_name  localhost;
 
     #charset koi8-r;
     access_log  /var/log/nginx/system.access.log  main;
@@ -53,7 +53,7 @@ server {
 }
 server {
     listen       8080;
-    server_name  localhost;
+    #server_name  localhost;
 
     #charset koi8-r;
     access_log  /var/log/nginx/bukken.access.log  main;
