@@ -72,4 +72,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
   config.vm.provision :shell, :path => "provision/scripts/env.sh"
   config.vm.provision :shell, :path => "provision/scripts/fw.sh"
+  config.vm.provision :shell, :path => "provision/scripts/remount.sh"
 end
