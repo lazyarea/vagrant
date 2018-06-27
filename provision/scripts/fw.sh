@@ -2,7 +2,7 @@
 
 systemctl enable nginx
 systemctl enable mariadb
-systemctl enable mariadb-server
+systemctl enable php-fpm
 
 firewall-cmd --permanent --add-port=80/tcp
 firewall-cmd --permanent --add-port=8080/tcp
