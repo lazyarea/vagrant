@@ -10,7 +10,7 @@ server {
     access_log  /var/log/nginx/system.access.log  main;
     error_log   /var/log/nginx/system.error.log   info;
 
-    root   /vagrant/system.heiyou.jp/webroot;
+    root   /vagrant/system/webroot;
 
     location / {
 	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
@@ -59,7 +59,7 @@ server {
     access_log  /var/log/nginx/bukken.access.log  main;
     error_log   /var/log/nginx/bukken.error.log   info;
 
-    root   /vagrant/bukken.heiyou.jp/webroot;
+    root   /vagrant/bukken/webroot;
 
     location / {
 	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
