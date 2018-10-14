@@ -10,7 +10,7 @@ server {
     access_log  /var/log/nginx/system.access.log  main;
     error_log   /var/log/nginx/system.error.log   info;
 
-    root   /vagrant/system/webroot;
+    root   /home/sites/bowlards/public;
 
     location / {
 	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
