@@ -103,3 +103,4 @@ server {
 NGINX
 
 sed -i 's/sendfile.*/sendfile off;/' /etc/nginx/nginx.conf
+
