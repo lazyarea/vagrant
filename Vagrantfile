@@ -7,7 +7,8 @@ Vagrant.configure("2") do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "public_network"
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "c:\/git\/repos", "/home/sites", owner: "nginx", group: "nginx"
+  config.vm.synced_folder "c:\/git\/repos", "/var/www"
+  #config.vm.synced_folder "c:\/git\/repos", "/var/www", owner: "nginx", group: "nginx"
   #
   # config.vm.provider "virtualbox" do ||
   #   .gui = true

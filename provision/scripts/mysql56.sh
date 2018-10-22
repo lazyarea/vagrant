@@ -1,6 +1,6 @@
 #!/bin/sh
 
-yum remove mariadb-libs
+yum remove mariadb-libs mariadb mariadb-*
 if [ -d /var/lib/mysql ]; then
 	rm -rf /var/lib/mysql
 fi
