@@ -7,11 +7,11 @@ my_pj_name='helloworld'
 
 sudo -uvagrant pyenv install ${PY3_VER}
 
-if [ -e ~/vagrant/pythonprojects ];then
-  exit(0)
-else
+ls ~vagrant/pythonprojects > /dev/null 2>&1
+if [ $? -ne 0 ];then
   su - vagrant
   cd ~
+  source ~vagrant/.bashrc
   mkdir -p ${PY3PY3_PJ_DIR}
   cd ${PY3PY3_PJ_DIR}
   pyenv install ${PY3_VER}

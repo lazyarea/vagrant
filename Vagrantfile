@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "public_network"
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "c:\/git\/repos", "/var/www/",
-	owner: "nginx", group: "nginx"
+  config.vm.synced_folder "c:\/git\/repos", "/var/www/"
+  #config.vm.synced_folder "c:\/git\/repos", "/var/www/", owner: "nginx", group: "nginx"
   #
   # config.vm.provider "virtualbox" do |vb|
   #   vb.gui = true
@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define :other1, autostart: false do |other1|
     other1.vm.hostname = 'other1'
-    other1.vm.network "private_network", ip: "192.168.33.12"
+    other1.vm.network "private_network", ip: "192.168.33.13"
   #  	other1.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
   #  	other1.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
     other1.vm.provider 'virtualbox' do |vb|
@@ -92,9 +92,9 @@ Vagrant.configure("2") do |config|
     other1.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
     other1.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
     other1.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-  #  	other1.vm.provision :shell, :path => "provision/scripts/py.sh"
-  #  	other1.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
-  #  	other1.vm.provision :shell, :path => "provision/scripts/py.sh"
+   	other1.vm.provision :shell, :path => "provision/scripts/py.sh"
+  	other1.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
+  	other1.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
 
 #	other0.vm.provision :shell, :path => "provision/scripts/fw.sh"
