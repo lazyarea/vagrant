@@ -3,104 +3,47 @@
 cp /etc/nginx/conf.d/default.conf{,.org}
 cat > /etc/nginx/conf.d/default.conf << NGINX
 server {
-    listen       80;
-    #server_name  localhost;
+    listen       *:80;
+    server_name  localhost;
 
     #charset koi8-r;
-    access_log  /var/log/nginx/system.access.log  main;
-    error_log   /var/log/nginx/system.error.log   info;
+    access_log  /var/log/nginx/xxxxx-access.log  main;
+    error_log   /var/log/nginx/xxxxx-error.log;
 
-    root   /vagrant/system/webroot;
+    root   /var/www/xxxxx/webroot;
+    index  index.php index.html index.htm;
 
     location / {
-	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
-        index  index.php index.html index.htm;
+        try_files $uri $uri?$args $uri/ /index.php?$uri&$args /index.php?$args;
     }
 
-    #error_page  404              /404.html;
-
-    # redirect server error pages to the static page /50x.html
-    #
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
         root   /usr/share/nginx/html;
     }
 
-    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-    #
-    #location ~ \.php$ {
-    #    proxy_pass   http://127.0.0.1;
-    #}
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
     location ~ \.php$ {
-#        root           html;
-        fastcgi_pass   127.0.0.1:9000;
+        try_files $uri =404;
+        fastcgi_pass   unix:/var/run/php-fpm/php-fpm.sock;
         fastcgi_index  index.php;
-#        fastcgi_param  SCRIPT_FILENAME  /scripts\$fastcgi_script_name;
-        fastcgi_param  SCRIPT_FILENAME  \$document_root/\$fastcgi_script_name;
-	fastcgi_param    CAKEPHP_ENV 'local';
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  CAKEPHP_ENV 'local';
+        fastcgi_read_timeout 120;
         include        fastcgi_params;
     }
 
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    #location ~ /\.ht {
-    #    deny  all;
-    #}
-}
-server {
-    listen       8080;
-    #server_name  localhost;
-
-    #charset koi8-r;
-    access_log  /var/log/nginx/bukken.access.log  main;
-    error_log   /var/log/nginx/bukken.error.log   info;
-
-    root   /vagrant/bukken/webroot;
-
-    location / {
-	try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
-        index  index.php index.html index.htm;
+    location = /favicon.ico {
+        error_page    404 = @favicon;
+        access_log    off;
+        log_not_found off;
     }
 
-    #error_page  404              /404.html;
-
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
+    location @favicon {
+        empty_gif;
+        access_log    off;
+        log_not_found off;
     }
-
-    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-    #
-    #location ~ \.php$ {
-    #    proxy_pass   http://127.0.0.1;
-    #}
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    location ~ \.php$ {
-#        root           html;
-        fastcgi_pass   127.0.0.1:9000;
-        fastcgi_index  index.php;
-#        fastcgi_param  SCRIPT_FILENAME  /scripts\$fastcgi_script_name;
-        fastcgi_param  SCRIPT_FILENAME  \$document_root/\$fastcgi_script_name;
-	fastcgi_param    CAKEPHP_ENV 'local';
-        include        fastcgi_params;
-    }
-
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    #location ~ /\.ht {
-    #    deny  all;
-    #}
 }
 NGINX
 
 sed -i 's/sendfile.*/sendfile off;/' /etc/nginx/nginx.conf
-
