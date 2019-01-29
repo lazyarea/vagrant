@@ -16,9 +16,14 @@ gpgcheck=0
 enabled=1
 NGINX
 
-yum -y install mariadb mariadb-devel mariadb-server
+yum -y --enablerepo=nginx install nginx
+<<<<<<< HEAD
 yum -y install --enablerepo=remi-php56 libmcrypt libmcrypt-devel php php-mcrypt php-fpm composer \
-	php-pecl-xdebug php-devel php-mbstring php-pdo php-gd libffi-dev \
+=======
+yum -y install mariadb mariadb-devel mariadb-server
+yum -y install --enablerepo=remi-php71 libmcrypt libmcrypt-devel php php-mcrypt php-fpm composer \
+>>>>>>> f2fb2f98becc45a5b41bdf79dc77c23367b80b8e
+	php-pecl-xdebug php-devel php-mbstring php-pdo php-gd \
         php-mcrypt php-zlib php-zip php-mysql  php-xml php-curl vim tree net-tools bind-utils ngrep nc
 
 echo "date.timezone = Asia/Tokyo" >> /etc/php.ini

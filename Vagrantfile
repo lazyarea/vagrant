@@ -5,26 +5,15 @@ Vagrant.configure("2") do |config|
   # config.vm.box = "base"
   config.vm.box = "centos/7"
   config.vm.box_check_update = false
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-  # config.vm.network "private_network", ip: "192.168.33.10"
-  # config.vm.network "public_network"
-  # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "c:\/git\/repos", "/var/www/"
-  #config.vm.synced_folder "c:\/git\/repos", "/var/www/", owner: "nginx", group: "nginx"
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   vb.gui = true
-  #   vb.memory = "1024"
-  # end
+  config.vm.synced_folder "~/Documents/project/shared", "/home/sites"
 
-  config.vm.define :www0 do |www0|
-#  	www0.vm.hostname = 'www0'
-  	www0.vm.network "private_network", ip: "192.168.33.11"
-	  www0.vm.provider 'virtualbox' do |vb|
-  		vb.name = 'www0'
-  		vb.memory = 4096
-  		vb.cpus = 4
+  config.vm.define :elearn do |elearn|
+#  	elearn.vm.hostname = 'elearn'
+  	elearn.vm.network "private_network", ip: "192.168.33.21"
+	  elearn.vm.provider 'virtualbox' do |vb|
+  		vb.name = 'elearn'
+  		vb.memory = 1024
+  		vb.cpus = 2
   		vb.customize [
 		        "modifyvm", :id,
 		        "--hwvirtex", "on",
@@ -35,12 +24,13 @@ Vagrant.configure("2") do |config|
 		        "--paravirtprovider", "kvm",
 	        ]
 	  end
-  	www0.vm.provision :shell, :path => "provision/scripts/env.sh"
-  	www0.vm.provision :shell, :path => "provision/scripts/pkg.sh"
-  	www0.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-  #	www0.vm.provision :shell, :path => "provision/scripts/fw.sh"
-  #	www0.vm.provision :shell, :path => "provision/scripts/remount.sh"
-  	www0.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+    elearn.vm.provision :shell, :path => "provision/scripts/env.sh"
+    elearn.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+    elearn.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
+    elearn.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+    elearn.vm.provision :shell, :path => "provision/scripts/py.sh"
+    elearn.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
+#    elearn.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
   config.vm.define :other0, autostart: false do |other0|
   	other0.vm.hostname = 'other0'

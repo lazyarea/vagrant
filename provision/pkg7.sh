@@ -1,7 +1,8 @@
 #!/bin/bash
 
 yum remove -y php php-*
-rm -fr/etc/php.* /etc/php
+yum remove -y httpd
+rm -fr /etc/php.* /etc/php
 
 
 yum -y install vim net-tools bind-utils ngrep
@@ -19,10 +20,13 @@ gpgcheck=0
 enabled=1
 NGINX
 
-yum -y --enablerepo=nginx install nginx
-yum -y install --enablerepo=remi,remi-php72 libmcrypt libmcrypt-devel php php-mcrypt php-fpm composer \
-	php-pecl-xdebug php-devel php-mbstring php-pdo php-gd  libffi-dev \
+rpm -qa | grep nginx > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  yum -y --enablerepo=nginx install nginx
+  yum -y install --enablerepo=remi,remi-php72 libmcrypt libmcrypt-devel php php-mcrypt php-fpm composer \
+	php-pecl-xdebug php-devel php-mbstring php-pdo php-gd \
 	php-mcrypt php-zlib php-zip php-mysql  php-xml php-curl vim tree net-tools bind-utils ngrep nc
+fi
 
 grep Asia\/Tokyo /etc/php.ini
 if [ $1 -ne '']; then
@@ -39,6 +43,5 @@ systemctl enable php-fpm
 systemctl start nginx
 systemctl start php-fpm
 
-yum remove -y httpd
 yum update -y
 # reboot
