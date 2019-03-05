@@ -6,6 +6,7 @@ yum -y install gcc zlib-devel bzip2 bzip2-devel readline readline-devel \
 grep PYENV_ROOT ~vagrant/.bashrc > /dev/null 2>&1
 if [ $? -eq 1 ]; then
   git clone https://github.com/pyenv/pyenv.git ~vagrant/.pyenv
+  sudo chown -R vagrant.  ~vagrant/.pyenv
 cat >> ~vagrant/.bashrc << PYENV
 
 #-----------------
