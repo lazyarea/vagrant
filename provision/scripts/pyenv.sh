@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum -y install gcc zlib-devel bzip2 bzip2-devel readline readline-devel \
-  openssl openssl-devel python2-pip git
+  openssl openssl-devel python2-pip git libffi-devel
 
 grep PYENV_ROOT ~vagrant/.bashrc > /dev/null 2>&1
 if [ $? -eq 1 ]; then
