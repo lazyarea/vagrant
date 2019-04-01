@@ -7,3 +7,5 @@
 
 
   http://download.virtualbox.org/virtualbox/5.2.12/
+
+  provision/files/id_rsa.pubを配置する必要がある
