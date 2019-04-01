@@ -45,7 +45,9 @@ Vagrant.configure("2") do |config|
 	        ]
 	  end
     hnode1.vm.provision :shell, :path => "provision/scripts/env.sh"
-#    hnode1.vm.provision :shell, :path => "provision/scripts/pkg.sh"
+    hnode1.vm.provision :shell, :path => "provision/scripts/pkg.sh"
+    hnode1.vm.provision :shell, :path => "provision/scripts/py.sh"
+    hnode1.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
   end
   config.vm.define :hnode2, autostart: false do |hnode2|
   	hnode2.vm.hostname = 'hnode2'
