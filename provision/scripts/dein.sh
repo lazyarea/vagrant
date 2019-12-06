@@ -1,5 +1,6 @@
 #!/bin/sh
 
+yum install -y vim
 cat >> ~vagrant/.vimrc << VIM
 if &compatible↲
   set nocompatible↲

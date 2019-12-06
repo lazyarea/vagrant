@@ -1,5 +1,6 @@
 #!/bin/sh
 
+yum install -y vim
 mkdir -p ~vagrant/.vim/colors
 cd ~vagrant/.vim
 mkdir colors
