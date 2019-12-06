@@ -24,14 +24,14 @@ Vagrant.configure("2") do |config|
             "--paravirtprovider", "kvm",
           ]
     end
-    django.vm.provision :shell, :path => "provision/scripts/env.sh"
-    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
-    django.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-    django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-    django.vm.provision :shell, :path => "provision/scripts/py.sh"
-    django.vm.provision :shell, :path => "provision/scripts/molokai.sh"
-    django.vm.provision :shell, :path => "provision/scripts/dein.sh"
-    django.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/env.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/py.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/molokai.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/dein.sh"
+#    django.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
 #    django.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
   config.vm.define :other0, autostart: false do |other0|
