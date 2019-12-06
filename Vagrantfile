@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
     django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
     django.vm.provision :shell, :path => "provision/scripts/py.sh"
     django.vm.provision :shell, :path => "provision/scripts/molokai.sh"
+    django.vm.provision :shell, :path => "provision/scripts/dein.sh"
     django.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
 #    django.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
