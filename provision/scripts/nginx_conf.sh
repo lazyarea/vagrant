@@ -1,5 +1,5 @@
 #!/bin/bash
-
+yum install -y nginx
 cp /etc/nginx/conf.d/default.conf{,.org}
 cat > /etc/nginx/conf.d/default.conf << NGINX
 server {

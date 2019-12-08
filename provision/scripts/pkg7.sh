@@ -1,7 +1,7 @@
 #!/bin/bash
 
 yum remove -y php php-*
-rm -fr/etc/php.* /etc/php
+rm -fr /etc/php.* /etc/php
 
 
 yum -y install vim net-tools bind-utils ngrep

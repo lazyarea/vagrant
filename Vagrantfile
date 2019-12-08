@@ -6,10 +6,11 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.box_check_update = false
   config.vm.synced_folder "~/Documents/project/shared", "/home/sites"
+  config.vm.synced_folder "./", "/vagrant"
 
   config.vm.define :django do |django|
 #    django.vm.hostname = 'django'
-    django.vm.network "private_network", ip: "192.168.33.21"
+    django.vm.network "private_network", ip: "192.168.33.10"
     django.vm.provider 'virtualbox' do |vb|
       vb.name = 'django'
       vb.memory = 1024
@@ -24,15 +25,43 @@ Vagrant.configure("2") do |config|
             "--paravirtprovider", "kvm",
           ]
     end
-    django.vm.provision :shell, :path => "provision/scripts/env.sh"
-    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
-    django.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-    django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-    django.vm.provision :shell, :path => "provision/scripts/py.sh"
-    django.vm.provision :shell, :path => "provision/scripts/molokai.sh"
-    django.vm.provision :shell, :path => "provision/scripts/dein.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/env.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/molokai.sh"
+#    django.vm.provision :shell, :path => "provision/scripts/dein.sh"
 #    django.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
 #    django.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
+  end
+  config.vm.define :centos8, autostart: false do |centos8|
+    centos8.vm.box = "generic/centos8"
+    centos8.vm.hostname = 'centos8'
+#    centos8.vm.network "private_network", ip: "192.168.33.12"
+#    centos8.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
+#    centos8.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
+    centos8.vm.provider 'virtualbox' do |vb|
+    vb.name = 'centos8'
+    vb.memory = 2048
+    vb.cpus = 2
+    vb.customize [
+            "modifyvm", :id,
+            "--hwvirtex", "on",
+            "--nestedpaging", "on",
+            "--largepages", "on",
+            "--ioapic", "on",
+            "--pae", "on",
+            "--paravirtprovider", "kvm",
+          ]
+    end
+#    centos8.vm.provision :shell, :path => "provision/scripts/env.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/molokai.sh"
+#    centos8.vm.provision :shell, :path => "provision/scripts/dein.sh"
   end
   config.vm.define :other0, autostart: false do |other0|
     other0.vm.hostname = 'other0'
