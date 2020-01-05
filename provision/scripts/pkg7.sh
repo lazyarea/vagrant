@@ -34,6 +34,12 @@ if [ -e /var/cache/nginx/.composer ]; then
   chown -R nginx. /var/cache/nginx/.composer
 fi
 
+grep -E ^listen\ =\ \/var\/run\/php-fpm\/php-fpm\.sock /etc/php-fpm.d/www.conf
+if [ $? -eq 1 ]; then
+  echo 'listen = /var/run/php-fpm/php-fpm.sock' >> /etc/php-fpm.d/www.conf
+  echo 'listen.owner = nginx' >> /etc/php-fpm.d/www.conf
+  echo 'listen.group = nginx' >> /etc/php-fpm.d/www.conf
+fi
 systemctl enable nginx
 systemctl enable php-fpm
 systemctl start nginx
