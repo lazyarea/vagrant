@@ -14,7 +14,7 @@ server {
     index  index.php index.html index.htm;
 
     location / {
-        try_files $uri $uri?$args $uri/ /index.php?$uri&$args /index.php?$args;
+        try_files \$uri \$uri?\$args \$uri/ /index.php?\$uri&\$args /index.php?\$args;
     }
 
     error_page   500 502 503 504  /50x.html;
@@ -22,11 +22,11 @@ server {
         root   /usr/share/nginx/html;
     }
 
-    location ~ \.php$ {
-        try_files $uri =404;
+    location ~ \.php\$ {
+        try_files \$uri =404;
         fastcgi_pass   unix:/var/run/php-fpm/php-fpm.sock;
         fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  SCRIPT_FILENAME  \$document_root\$fastcgi_script_name;
         fastcgi_param  CAKEPHP_ENV 'local';
         fastcgi_read_timeout 120;
         include        fastcgi_params;
