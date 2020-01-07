@@ -25,8 +25,8 @@ Vagrant.configure("2") do |config|
             "--paravirtprovider", "kvm",
           ]
     end
-#    django.vm.provision :shell, :path => "provision/scripts/env.sh"
-#    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+    django.vm.provision :shell, :path => "provision/scripts/env.sh"
+    django.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
 #    django.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
 #    django.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
 #    django.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
