@@ -4,8 +4,12 @@ yum remove -y php php-*
 rm -fr /etc/php.* /etc/php
 
 
-yum -y install vim net-tools bind-utils ngrep
+yum -y install vim net-tools bind-utils ngrep git
 
+sudo -uvagrant git config --global alias.br branch
+sudo -uvagrant git config --global alias.co checkout
+sudo -uvagrant git config --global alias.f fetch
+sudo -uvagrant git config --global alias.ci commit
 
 curl -O -L http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum localinstall -y remi-release-7.rpm
