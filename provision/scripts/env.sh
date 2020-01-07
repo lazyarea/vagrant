@@ -17,3 +17,5 @@ ssh-add $HOME/.ssh/id_rsa
 SSHADD
 
 fi
+yum install -y kernel-devel
+reboot
