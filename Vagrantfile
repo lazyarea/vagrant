@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
             "--largepages", "on",
             "--ioapic", "on",
             "--pae", "on",
+            "--audio", "none",
             "--paravirtprovider", "kvm",
           ]
     end
@@ -52,6 +53,7 @@ Vagrant.configure("2") do |config|
             "--largepages", "on",
             "--ioapic", "on",
             "--pae", "on",
+            "--audio", "none",
             "--paravirtprovider", "kvm",
           ]
     end
@@ -79,6 +81,7 @@ Vagrant.configure("2") do |config|
             "--largepages", "on",
             "--ioapic", "on",
             "--pae", "on",
+            "--audio", "none",
             "--paravirtprovider", "kvm",
           ]
     end
@@ -106,6 +109,7 @@ Vagrant.configure("2") do |config|
             "--largepages", "on",
             "--ioapic", "on",
             "--pae", "on",
+            "--audio", "none",
             "--paravirtprovider", "kvm",
           ]
     end
