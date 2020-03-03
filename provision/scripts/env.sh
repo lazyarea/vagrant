@@ -18,4 +18,3 @@ SSHADD
 
 fi
 yum install -y kernel-devel
-reboot

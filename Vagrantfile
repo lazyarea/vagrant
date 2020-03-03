@@ -36,14 +36,13 @@ Vagrant.configure("2") do |config|
 #    django.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
 #    django.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
-  config.vm.define :centos8, autostart: false do |centos8|
-    centos8.vm.box = "generic/centos8"
-    centos8.vm.hostname = 'centos8'
-#    centos8.vm.network "private_network", ip: "192.168.33.12"
-#    centos8.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
-#    centos8.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
-    centos8.vm.provider 'virtualbox' do |vb|
-    vb.name = 'centos8'
+  config.vm.define :docker, autostart: false do |docker|
+    docker.vm.hostname = 'docker'
+    docker.vm.network "private_network", ip: "192.168.33.11"
+#    docker.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
+#    docker.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
+    docker.vm.provider 'virtualbox' do |vb|
+    vb.name = 'docker'
     vb.memory = 2048
     vb.cpus = 2
     vb.customize [
@@ -57,21 +56,20 @@ Vagrant.configure("2") do |config|
             "--paravirtprovider", "kvm",
           ]
     end
-#    centos8.vm.provision :shell, :path => "provision/scripts/env.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/molokai.sh"
-#    centos8.vm.provision :shell, :path => "provision/scripts/dein.sh"
+#    docker.vm.provision :shell, :path => "provision/scripts/env.sh"
+#    docker.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
+#    docker.vm.provision :shell, :path => "provision/scripts/molokai.sh"
+    docker.vm.provision :shell, :path => "provision/scripts/docker.sh"
   end
-  config.vm.define :other0, autostart: false do |other0|
-    other0.vm.hostname = 'other0'
-    other0.vm.network "private_network", ip: "192.168.33.12"
-#    other0.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
-#    other0.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
-    other0.vm.provider 'virtualbox' do |vb|
-#      vb.name = 'other0'
+  config.vm.define :kali, autostart: false do |kali|
+    kali.vm.box = 'kalilinux/rolling'
+    kali.vm.hostname = 'kali'
+    kali.vm.network "private_network", ip: "192.168.33.30"
+    kali.vm.network "forwarded_port", guest: 80, host: 8080
+    #kali.vm.network "private_network", ip: "192.168.33.30", guest: 80, host: 8080
+  #    kali.vm.network "private_network", ip: "192.168.33.30", guest: 8080, host: 8081
+    kali.vm.provider 'virtualbox' do |vb|
+    vb.name = 'kali'
     vb.memory = 2048
     vb.cpus = 2
     vb.customize [
@@ -85,41 +83,17 @@ Vagrant.configure("2") do |config|
             "--paravirtprovider", "kvm",
           ]
     end
-    other0.vm.provision :shell, :path => "provision/scripts/env.sh"
-    other0.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
-    other0.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-    other0.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-#    other0.vm.provision :shell, :path => "provision/scripts/py.sh"
-#    other0.vm.provision :shell, :path => "provision/scripts/pyenv.sh"
-#    other0.vm.provision :shell, :path => "provision/scripts/py.sh"
-  end
-  config.vm.define :other1, autostart: false do |other1|
-    other1.vm.hostname = 'other1'
-    other1.vm.network "private_network", ip: "192.168.33.13"
-  #    other1.vm.network "private_network", ip: "192.168.33.12", guest: 80, host: 81
-  #    other1.vm.network "private_network", ip: "192.168.33.12", guest: 8080, host: 8081
-    other1.vm.provider 'virtualbox' do |vb|
-  #      vb.name = 'other1'
-    vb.memory = 2048
-    vb.cpus = 2
-    vb.customize [
-            "modifyvm", :id,
-            "--hwvirtex", "on",
-            "--nestedpaging", "on",
-            "--largepages", "on",
-            "--ioapic", "on",
-            "--pae", "on",
-            "--audio", "none",
-            "--paravirtprovider", "kvm",
-          ]
-    end
-    other1.vm.provision :shell, :path => "provision/scripts/env.sh"
-    other1.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
-    other1.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
-    other1.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
-     other1.vm.provision :shell, :path => "provision/scripts/py.sh"
-    other1.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
-    other1.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
+    kali.vm.provision "shell", inline: <<-SHELL
+        apt-get update
+        apt-get install -y crowbar
+    SHELL
+#    kali.vm.provision :shell, :path => "provision/scripts/env.sh"
+#    kali.vm.provision :shell, :path => "provision/scripts/pkg7.sh"
+#    kali.vm.provision :shell, :path => "provision/scripts/nginx_conf.sh"
+#    kali.vm.provision :shell, :path => "provision/scripts/mysql56.sh"
+#    kali.vm.provision :shell, :path => "provision/scripts/py.sh"
+#    kali.vm.provision :file, source: "provision/scripts/pyenv.sh", destination: "~vagrant/pyenv.sh"
+#    kali.vm.provision :file, source: "provision/scripts/virtualenv.sh", destination: "~vagrant/virtualenv.sh"
   end
 
 #  other0.vm.provision :shell, :path => "provision/scripts/fw.sh"
