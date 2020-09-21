@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sudo yum -y install kernel-devel kernel-headers dkms gcc gcc-c++
 sed -ie 's/enforcing/disabled/g' /etc/selinux/config
 
 grep SELINUX=disabled /etc/selinux/config > /dev/null 2>&1
