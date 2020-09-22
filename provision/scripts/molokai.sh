@@ -1,10 +1,9 @@
 #!/bin/sh
 
-yum install -y vim
+yum install -y vim git
 mkdir -p ~vagrant/.vim/colors
 
-git clone https://github.com/tomasr/molokai
-mv molokai/colors/molokai.vim ~vagrant/.vim/colors/
+git clone https://github.com/tomasr/molokai ~vagrant/.vim
 
 cat >> ~vagrant/.vimrc << VIM
 
