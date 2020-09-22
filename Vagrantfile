@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     #    "--pae", "on",
         "--audio", "none",
     #    "--paravirtprovider", "kvm",
-        '--cableconnected1', 'on',
+        '--cableconnected2', 'on',
     ]
   end
 
@@ -39,4 +39,5 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
     yum -y install kernel-devel kernel-headers dkms gcc gcc-c++
   SHELL
+  config.vm.provision :shell, :path => "provision/scripts/env.sh"
 end
