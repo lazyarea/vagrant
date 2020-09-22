@@ -19,3 +19,13 @@ SSHADD
 
 fi
 yum install -y kernel-devel
+
+cat >> /etc/rc.d/rc.local << LOCAL
+
+df -T | grep vagrant > /dev/null 2>&1
+if [ \$? -eq 1 ]; then
+  mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3`,dmode=777,fmode=666 vagrant /vagrant
+  mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant`,dmode=777,fmode=666 vagrant /vagrant
+fi
+LOCAL
+chmod 755 /etc/rc.d/rc.local

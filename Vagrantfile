@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "private_network", ip: "192.168.33.11"
   #config.vm.network "public_network"
-  config.vm.synced_folder "./", "/vagrant_data"
+  config.vm.synced_folder "./", "/vagrant", type: "virtualbox"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
@@ -34,10 +34,11 @@ Vagrant.configure("2") do |config|
     ]
   end
 
-  config.vm.provision "shell", inline: <<-SHELL
+  #config.vm.provision "shell", inline: <<-SHELL
   #   apt-get update
   #   apt-get install -y apache2
-    yum -y install kernel-devel kernel-headers dkms gcc gcc-c++
-  SHELL
+  #  yum -y install kernel-devel kernel-headers dkms gcc gcc-c++
+  #SHELL
   config.vm.provision :shell, :path => "provision/scripts/env.sh"
+  #config.vm.provision :shell, :path => "provision/scripts/docker-ce.sh"
 end
