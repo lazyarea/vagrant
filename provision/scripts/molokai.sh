@@ -3,8 +3,7 @@
 yum install -y vim
 mkdir -p ~vagrant/.vim/colors
 
-git clone https://github.com/tomasr/molokai
-mv molokai/colors/molokai.vim ~vagrant/.vim/colors/
+git clone https://github.com/tomasr/molokai ~vagrant/.vim
 
 cat >> ~vagrant/.vimrc << VIM
 
@@ -20,6 +19,7 @@ set smartindent
 set nrformats-=octal
 set hidden
 set history=50
+set hlsearch
 set virtualedit=block
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
